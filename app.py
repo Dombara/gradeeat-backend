@@ -1372,7 +1372,7 @@ data=[
 ]
 
 
-@app.route('/add-all',methods=['POST'])
+@app.route('/add-all',methods=['GET'])
 def addall():
     
     db.Products.insert_many(data)

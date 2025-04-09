@@ -10,7 +10,7 @@ app = Flask(__name__)
 CORS(app)
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 mongo = PyMongo(app)
-
+db= mongo.db
 
 
 
@@ -103,7 +103,7 @@ def add_data():
         return jsonify({"error": "No data provided"}), 400
 
     try:
-        mongo.db.test_collection.insert_one(data)
+        mongo.db.categories.insert_one(data)
         return jsonify({"message": "Data inserted successfully!"}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500

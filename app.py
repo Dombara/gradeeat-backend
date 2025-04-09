@@ -90,7 +90,7 @@ def get_categories():
 def get_category_by_id(id):
     try:
         id = int(id)
-        category_data = db.categories.find_one({"id": id})
+        category_data = db.categories.find_one({"id": int(id)})
         if not category_data:
             return jsonify({"error": "Category not found"}), 404
         return jsonify(category_data)

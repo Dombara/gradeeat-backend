@@ -88,13 +88,14 @@ def get_categories():
 
 @app.route('/category/<string:id>', methods=['GET'])
 def get_category_by_id(id):
-    category_data = [
-        {
-            "id": 1,
-            "icon": "/images/icon/icon-01.svg",
-            "title": "Crafted for SaaS",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
-        }
+    category_data = db.categories.find_one({"id": id})
+    # category_data = [
+        # {
+        #     "id": 1,
+        #     "icon": "/images/icon/icon-01.svg",
+        #     "title": "Crafted for SaaS",
+        #     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
+        # }
         # ,
         # {
         #     "id": 2,
@@ -127,13 +128,8 @@ def get_category_by_id(id):
         #     "title": "Regular Free Updates",
         #     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
         # }
-    ]
-    return jsonify({
-            "id": 1,
-            "icon": "/images/icon/icon-01.svg",
-            "title": "Crafted for SaaS",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
-        })
+    # ]
+    return jsonify(category_data)
 
 
 

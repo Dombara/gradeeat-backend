@@ -6,7 +6,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Use your full Mongo URI
-MONGO_URI = "mongodb+srv://yash:<db_password>@cluster0.bcuflio.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGO_URI = "mongodb+srv://yash:yash@cluster0.bcuflio.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 # Configure the app to use the URI
 app.config["MONGO_URI"] = MONGO_URI

@@ -86,9 +86,23 @@ def get_categories():
 
 
 
+
+
+
+
 @app.route('/category/<string:id>', methods=['GET'])
 def get_category_by_id(id):
-    category_data = db.categories.find_one({"id": id})
+    try:
+        category_data = db.categories.find_one({"id": int(id)})
+
+        if category_data:
+            # Remove the MongoDB-generated _id field
+            # category_data.pop("_id", None)
+            return jsonify(category_data)
+        else:
+            return jsonify({"error": "Category not found"}), 404
+    except ValueError:
+        return jsonify({"error": "Invalid ID format"}), 400
     # category_data = [
         # {
         #     "id": 1,
@@ -129,7 +143,7 @@ def get_category_by_id(id):
         #     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
         # }
     # ]
-    return jsonify(category_data)
+    
 
 
 

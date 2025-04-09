@@ -88,48 +88,15 @@ def get_categories():
 
 @app.route('/category/<string:id>', methods=['GET'])
 def get_category_by_id(id):
-    category_data = db.categories.find_one({"id":id})
-    # category_data = [
-        # {
-        #     "id": 1,
-        #     "icon": "/images/icon/icon-01.svg",
-        #     "title": "Crafted for SaaS",
-        #     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
-        # }
-        # ,
-        # {
-        #     "id": 2,
-        #     "icon": "/images/icon/icon-02.svg",
-        #     "title": "High-quality Design",
-        #     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
-        # },
-        # {
-        #     "id": 3,
-        #     "icon": "/images/icon/icon-03.svg",
-        #     "title": "Next.js 13 + TypeScript",
-        #     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
-        # },
-        # {
-        #     "id": 4,
-        #     "icon": "/images/icon/icon-04.svg",
-        #     "title": "Sanity Blog and Docs",
-        #     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
-        # },
-        # {
-        #     "id": 5,
-        #     "icon": "/images/icon/icon-05.svg",
-        #     "title": "DB, Auth and Stripe",
-        #     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
-        # }
-        # ,
-        # {
-        #     "id": 6,
-        #     "icon": "/images/icon/icon-06.svg",
-        #     "title": "Regular Free Updates",
-        #     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
-        # }
-    # ]
-    return jsonify(category_data)
+    try:
+        id = int(id)
+        category_data = db.categories.find_one({"id": id})
+        if not category_data:
+            return jsonify({"error": "Category not found"}), 404
+        return jsonify(category_data)
+    except ValueError:
+        return jsonify({"error": "Invalid ID format"}), 400
+
 
 
 

@@ -103,7 +103,7 @@ def add_data():
         return jsonify({"error": "No data provided"}), 400
 
     try:
-        mongo.db.categories.insert_one(data)
+        db.categories.insert_one(data)
         return jsonify({"message": "Data inserted successfully!"}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500

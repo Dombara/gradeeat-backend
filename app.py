@@ -98,9 +98,15 @@ def get_categories():
 
 @app.route('/add', methods=['POST'])
 def add_data():
-    data = request.json
-    mongo.db.test_collection.insert_one(data)
-    return jsonify({"message": "Data inserted successfully!"})
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+
+    try:
+        mongo.db.test_collection.insert_one(data)
+        return jsonify({"message": "Data inserted successfully!"}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 

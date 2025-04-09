@@ -88,7 +88,7 @@ def get_categories():
 
 @app.route('/category/<string:id>', methods=['GET'])
 def get_category_by_id(id):
-    category_data = db.categories.find_one({"id": id})
+    category_data = db.categories.find_one({"id": int(id)})
     # category_data = [
         # {
         #     "id": 1,

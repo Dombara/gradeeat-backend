@@ -1,4 +1,5 @@
 import os
+from flask_cors import CORS 
 from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 
@@ -6,6 +7,7 @@ MONGO_URI="mongodb+srv://yash:yash@cluster0.bcuflio.mongodb.net/?retryWrites=tru
 
 
 app = Flask(__name__)
+CORS(app)
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 mongo = PyMongo(app)
 

@@ -89,7 +89,7 @@ def get_categories():
 @app.route('/category/<string:id>', methods=['GET'])
 def get_category_by_id(id):
     try:
-        category_data = db.Products.find({"id": int(id)})
+        category_data = db.Products.find({"categoryId": int(id)})
 
         if not category_data:
             return jsonify({"error": "Category not found"}), 404

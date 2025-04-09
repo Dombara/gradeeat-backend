@@ -95,7 +95,7 @@ def get_category_by_id(id):
             return jsonify({"error": "Category not found"}), 404
 
         # Convert ObjectId to string for JSON serialization
-        category_data["_id"] = str(category_data["_id"])
+        # category_data["_id"] = str(category_data["_id"])
 
         return jsonify(category_data)
     except ValueError:

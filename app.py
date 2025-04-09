@@ -122,7 +122,7 @@ def get_category_by_id(id):
 
         # Convert ObjectId to string for JSON serialization
         for product in products:
-            product["_id"] = str(product["_id"])
+            product["id"] = str(product["id"])
 
         return jsonify(products)
     except ValueError:

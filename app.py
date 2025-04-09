@@ -1376,6 +1376,7 @@ data=[
 def addall():
     
     db.Products.insert_many(data)
+    return("done")
         
 
 

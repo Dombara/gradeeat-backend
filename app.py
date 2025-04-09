@@ -3,28 +3,35 @@ from flask_cors import CORS
 from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 
-MONGO_URI="mongodb+srv://yash:yash@cluster0.bcuflio.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-
+# You can hardcode it here or set it in environment variables
+MONGO_URI = "mongodb+srv://yash:yash@cluster0.bcuflio.mongodb.net/yourdbname?retryWrites=true&w=majority&appName=Cluster0"
 
 app = Flask(__name__)
 CORS(app)
-app.config["MONGO_URI"] = os.environ.get("MONGO_URI", MONGO_URI)
+
+# Set the Mongo URI
+app.config["MONGO_URI"] = MONGO_URI
+
+# Initialize Mongo connection
 mongo = PyMongo(app)
-db= mongo.db
 
-
-
-
-
-
+# Access the specific database (replace 'yourdbname' with actual name)
+db = mongo.cx["yourdbname"]  # ← important change here!
 
 @app.route('/')
 def index():
     return "Welcome to the Flask MongoDB API!"
 
-
-
-
+@app.route('/add', methods=['POST'])
+def add_data():
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+    try:
+        db.categories.insert_one(data)
+        return jsonify({"message": "Data inserted successfully!"}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 
@@ -94,19 +101,6 @@ def get_categories():
 
 
 
-
-
-@app.route('/add', methods=['POST'])
-def add_data():
-    data = request.get_json()
-    if not data:
-        return jsonify({"error": "No data provided"}), 400
-
-    try:
-        db.categories.insert_one(data)
-        return jsonify({"message": "Data inserted successfully!"}), 201
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
 
 
 

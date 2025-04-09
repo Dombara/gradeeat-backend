@@ -1,18 +1,19 @@
-import os
-from flask_cors import CORS 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from flask_pymongo import PyMongo
-
-MONGO_URI="mongodb+srv://yash:yash@cluster0.bcuflio.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-
 
 app = Flask(__name__)
 CORS(app)
-app.config["MONGO_URI"] = os.environ.get("MONGO_URI", MONGO_URI)
+
+# Use your full Mongo URI
+MONGO_URI = "mongodb+srv://yash:yash@cluster0.bcuflio.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
+# Configure the app to use the URI
+app.config["MONGO_URI"] = MONGO_URI
 mongo = PyMongo(app)
-db= mongo.db
 
-
+# Access the specific database manually since no default DB is defined in the URI
+db = mongo.cx["grade-eat"]  # 👈 Replace 'yourdbname' with your actual database name
 
 
 
@@ -20,8 +21,8 @@ db= mongo.db
 
 @app.route('/')
 def index():
+    # print(db)
     return "Welcome to the Flask MongoDB API!"
-    print(db)
 
 
 
@@ -38,7 +39,7 @@ def index():
 
 
 
-@app.route('/categories', methods=['GET'])
+@app.route('/categories:', methods=['GET'])
 def get_categories():
     category_data = [
         {

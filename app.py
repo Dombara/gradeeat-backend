@@ -1375,7 +1375,7 @@ data=[
 @app.route('/add-all',methods=['GET'])
 def addall():
     
-    db.Products.insert_many(data)
+    db.reviews.insert_many(data)
     return("done")
         
 

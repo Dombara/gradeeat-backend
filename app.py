@@ -128,7 +128,12 @@ def get_category_by_id(id):
         #     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
         # }
     ]
-    return jsonify(category_data)
+    return jsonify({
+            "id": 1,
+            "icon": "/images/icon/icon-01.svg",
+            "title": "Crafted for SaaS",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
+        })
 
 
 

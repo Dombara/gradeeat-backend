@@ -8,7 +8,7 @@ MONGO_URI="mongodb+srv://yash:yash@cluster0.bcuflio.mongodb.net/?retryWrites=tru
 
 app = Flask(__name__)
 CORS(app)
-app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI", MONGO_URI)
 mongo = PyMongo(app)
 db= mongo.db
 

@@ -13,7 +13,7 @@ app.config["MONGO_URI"] = MONGO_URI
 mongo = PyMongo(app)
 
 # Access the specific database manually since no default DB is defined in the URI
-db = mongo.cx["grade-mydb"]  # 👈 Replace 'yourdbname' with your actual database name
+db = mongo.cx["mydb"]  # 👈 Replace 'yourdbname' with your actual database name
 
 
 

@@ -184,6 +184,59 @@ def add_complaint():
 
 
 
+@app.route('/analytics/<int:category_id>', methods=['GET'])
+def categories_analytics(category_id):
+    try:
+        products_analytics_data=list(db.products.find({"category_id": category_id}))
+
+        if not products_analytics_data:
+            return jsonify({"status": "error", "message": "No products found for this category"}), 404
+        
+        for product in products_analytics_data:
+            product["_id"] = str(product["_id"])
+            # product["category_id"] = str(product["category_id"])
+
+        top_rated = sorted(products_analytics_data, key=lambda x: x.get("rating", 0), reverse=True)[:5]
+        
+        top_rated_data = [
+            {
+                "name": p.get("name"),
+                "rating": p.get("rating"),
+                "brand": p.get("brand")
+            } for p in top_rated
+        ]
+
+
+
+        least_complaints = sorted(products_analytics_data, key=lambda x: len(x.get("complaints", [])))[:5]
+
+        least_complaints_data = [
+            {
+                "name": p.get("name"),
+                "complaints_count": len(p.get("complaints", [])),
+                "brand": p.get("brand")
+            } for p in least_complaints
+        ]
+
+
+        return jsonify({
+            "status": "success",
+            "category_id": category_id,
+            "top_rated_products": top_rated_data,
+            "least_complaints_products": least_complaints_data
+        }), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
+
+
+
+
+
+
 
 
 

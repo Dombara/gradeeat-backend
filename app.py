@@ -24,37 +24,37 @@ def get_categories():
     category_data = [
         {
             "id": 1,
-            "icon": "/images/icon/icon-01.svg",
+            "icon": "\images\icon\packproducts.png",
             "title": "Packaged Food",
             "description": "Explore snacks, ready meals, and all packaged products reviewed by real users for freshness and quality"
         },
         {
             "id": 2,
-            "icon": "/images/icon/icon-02.svg",
+            "icon": "\images\icon\dairy.png",
             "title": "Dairy Products",
             "description": "Check ratings on milk, cheese, curd and more – freshness, quality, and hygiene verified by the community"
         },
         {
             "id": 3,
-            "icon": "/images/icon/icon-03.svg",
+            "icon": "\images\icon\beverages.png",
             "title": "Beverages",
             "description": "From juices to soft drinks, see what’s refreshing and what’s not – based on authentic user reviews"
         },
         {
             "id": 4,
-            "icon": "/images/icon/icon-04.svg",
+            "icon": "\images\icon\readytoeat.png",
             "title": "Ready-to-Eat",
             "description": "Microwave meals and instant mixes—find out which ones actually taste good and meet food safety norms."
         },
         {
             "id": 5,
-            "icon": "/images/icon/icon-05.svg",
+            "icon": "\images\icon\supplementaryfood.png",
             "title": "Health & Nutrition",
             "description": "Whey proteins, vitamins, and more—get feedback from real users before you consume for your wellness."
         },
         {
         "id": 6,
-        "icon": "/images/icon/icon-06.svg",
+        "icon": "\images\icon\.foodchains.png",
         "title": "Food Chains",
         "description": "Popular restaurants and food chains rated for cleanliness, taste, and service. Add your own experience!"
     }

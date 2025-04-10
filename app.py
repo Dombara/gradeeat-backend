@@ -55,7 +55,7 @@ def get_categories():
         {
         "id": 6,
         "icon": "/images/icon/icon-06.svg",
-        "title": ""Food Chains",
+        "title": "Food Chains",
         "description": "Popular restaurants and food chains rated for cleanliness, taste, and service. Add your own experience!"
     }
     ]

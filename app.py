@@ -19,52 +19,47 @@ def index():
     return "Welcome to the Flask MongoDB API!"
 
 # Static category data
-from flask import Flask, jsonify
-
-app = Flask(__name__)
-
 @app.route('/categories', methods=['GET'])
 def get_categories():
     category_data = [
         {
             "id": 1,
-            "icon": "/images/icon/packproducts.png",
+            "icon": "/images/icon/icon-01.svg",
             "title": "Packaged Food",
             "description": "Explore snacks, ready meals, and all packaged products reviewed by real users for freshness and quality"
         },
         {
             "id": 2,
-            "icon": "/images/icon/dairy.png",
+            "icon": "/images/icon/icon-02.svg",
             "title": "Dairy Products",
             "description": "Check ratings on milk, cheese, curd and more – freshness, quality, and hygiene verified by the community"
         },
         {
             "id": 3,
-            "icon": "/images/icon/beverages.png",
+            "icon": "/images/icon/icon-04.svg",
             "title": "Beverages",
             "description": "From juices to soft drinks, see what’s refreshing and what’s not – based on authentic user reviews"
         },
         {
             "id": 4,
-            "icon": "/images/icon/readytoeat.png",
+            "icon": "/images/icon/icon-04.svg",
             "title": "Ready-to-Eat",
             "description": "Microwave meals and instant mixes—find out which ones actually taste good and meet food safety norms."
         },
         {
             "id": 5,
-            "icon": "/images/icon/supplementaryfood.png",
+            "icon": "/images/icon/icon-04.svg",
             "title": "Health & Nutrition",
             "description": "Whey proteins, vitamins, and more—get feedback from real users before you consume for your wellness."
         },
         {
-            "id": 6,
-            "icon": "/images/icon/foodchains.png",
-            "title": "Food Chains",
-            "description": "Popular restaurants and food chains rated for cleanliness, taste, and service. Add your own experience!"
-        }
+        "id": 6,
+        "icon": "/images/icon/icon-06.svg",
+        "title": "Food Chains",
+        "description": "Popular restaurants and food chains rated for cleanliness, taste, and service. Add your own experience!"
+    }
     ]
     return jsonify(category_data)
-
 
 # Get products by category ID
 @app.route('/category/<string:id>', methods=['GET'])

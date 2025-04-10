@@ -101,19 +101,43 @@ def get_reviews_by_category_id(id):
         return jsonify({"error": "Invalid ID format"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
 
-# Add category data
-@app.route('/add', methods=['POST'])
-def add_category():
-    data = request.get_json()
-    if not data:
-        return jsonify({"error": "No data provided"}), 400
 
+
+
+
+
+@app.route('/complaints/<string:id>', methods=['GET'])
+def get_reviews_by_category_id(id):
     try:
-        db.categories.insert_one(data)
-        return jsonify({"message": "Data inserted successfully!"}), 201
+        complaints = db.complaints.find({"categoryId": int(id)})
+        complaints_list = list(complaints)
+
+        if not complaints_list:
+            return jsonify({"error": "Category not found"}), 404
+
+        for review in complaints_list:
+            review["_id"] = str(review["_id"])
+
+        return jsonify(complaints_list)
+    except ValueError:
+        return jsonify({"error": "Invalid ID format"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+# Add category data
+# @app.route('/add', methods=['POST'])
+# def add_category():
+#     data = request.get_json()
+#     if not data:
+#         return jsonify({"error": "No data provided"}), 400
+
+#     try:
+#         db.categories.insert_one(data)
+#         return jsonify({"message": "Data inserted successfully!"}), 201
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500
 
 # Add review data
 @app.route('/add-review', methods=['POST'])
@@ -127,6 +151,42 @@ def add_review():
         return jsonify({"message": "Review inserted successfully!"}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@app.route('/add-complaint', methods=['POST'])
+def add_review():
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+
+    try:
+        db.complaints.insert_one(data)
+        return jsonify({"message": "Review inserted successfully!"}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+
+
+
+
+
+
+
 
 # Run the Flask app
 if __name__ == '__main__':

@@ -36,7 +36,7 @@ def get_categories():
         },
         {
             "id": 3,
-            "icon": "/images/icon/icon-04.svg",
+            "icon": "/images/icon/icon-03.svg",
             "title": "Beverages",
             "description": "From juices to soft drinks, see what’s refreshing and what’s not – based on authentic user reviews"
         },
@@ -48,7 +48,7 @@ def get_categories():
         },
         {
             "id": 5,
-            "icon": "/images/icon/icon-04.svg",
+            "icon": "/images/icon/icon-05.svg",
             "title": "Health & Nutrition",
             "description": "Whey proteins, vitamins, and more—get feedback from real users before you consume for your wellness."
         },

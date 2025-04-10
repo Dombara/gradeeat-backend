@@ -109,7 +109,7 @@ def get_reviews_by_category_id(id):
 
 
 @app.route('/complaints/<string:id>', methods=['GET'])
-def get_reviews_by_category_id(id):
+def get_complaints_by_category_id(id):
     try:
         complaints = db.complaints.find({"categoryId": int(id)})
         complaints_list = list(complaints)

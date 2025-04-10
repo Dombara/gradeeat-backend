@@ -25,38 +25,38 @@ def get_categories():
         {
             "id": 1,
             "icon": "/images/icon/icon-01.svg",
-            "title": "Crafted for SaaS",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
+            "title": "Packaged Food",
+            "description": "Explore snacks, ready meals, and all packaged products reviewed by real users for freshness and quality"
         },
         {
             "id": 2,
             "icon": "/images/icon/icon-02.svg",
-            "title": "High-quality Design",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
+            "title": "Dairy Products",
+            "description": "Check ratings on milk, cheese, curd and more – freshness, quality, and hygiene verified by the community"
         },
         {
             "id": 3,
             "icon": "/images/icon/icon-03.svg",
-            "title": "Next.js 13 + TypeScript",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
+            "title": "Beverages",
+            "description": "From juices to soft drinks, see what’s refreshing and what’s not – based on authentic user reviews"
         },
         {
             "id": 4,
             "icon": "/images/icon/icon-04.svg",
-            "title": "Sanity Blog and Docs",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
+            "title": "Ready-to-Eat",
+            "description": "Microwave meals and instant mixes—find out which ones actually taste good and meet food safety norms."
         },
         {
             "id": 5,
             "icon": "/images/icon/icon-05.svg",
-            "title": "DB, Auth and Stripe",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
+            "title": "Health & Nutrition",
+            "description": "Whey proteins, vitamins, and more—get feedback from real users before you consume for your wellness."
         },
         {
         "id": 6,
         "icon": "/images/icon/icon-06.svg",
-        "title": "Regular Free Updates",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
+        "title": ""Food Chains",
+        "description": "Popular restaurants and food chains rated for cleanliness, taste, and service. Add your own experience!"
     }
     ]
     return jsonify(category_data)

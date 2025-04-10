@@ -169,7 +169,7 @@ def add_review():
 
 
 @app.route('/add-complaint', methods=['POST'])
-def add_review():
+def add_complaint():
     data = request.get_json()
     if not data:
         return jsonify({"error": "No data provided"}), 400

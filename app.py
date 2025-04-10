@@ -65,37 +65,32 @@ def get_categories():
 
 
 
-# Get products by category ID
 @app.route('/category/<string:id>', methods=['GET'])
 def get_category_by_id(id):
     try:
-        # Convert category ID to integer
         category_id = int(id)
 
-        # Fetch products belonging to this category
-        category_data = db.products.find({"categoryId": category_id})
-        products = list(category_data)
-
-        # Fetch category information
+        # Fetch category
         category_info = db.categories.find_one({"id": category_id})
-
         if not category_info:
             return jsonify({"error": "Category not found"}), 404
+        category_info["_id"] = str(category_info["_id"])  # Convert ObjectID to string
 
-        # Convert MongoDB ObjectIDs to strings
+        # Fetch products
+        products_cursor = db.products.find({"categoryId": category_id})
+        products = list(products_cursor)
         for product in products:
-            product["_id"] = str(product["_id"])
+            product["_id"] = str(product["_id"])  # Convert ObjectID to string
 
-            category_info["_id"] = str(category_info["_id"])
+        # Combine into a single array
+        response = [category_info] + products
 
-        # Return both category and product data
-        return jsonify([category_info] + products)
+        return jsonify(response)
 
     except ValueError:
         return jsonify({"error": "Invalid ID format"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 
 

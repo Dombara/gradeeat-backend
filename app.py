@@ -5,40 +5,20 @@ from flask_pymongo import PyMongo
 app = Flask(__name__)
 CORS(app)
 
-# Use your full Mongo URI
+# MongoDB URI
 MONGO_URI = "mongodb+srv://yash:yash@cluster0.bcuflio.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-
-# Configure the app to use the URI
 app.config["MONGO_URI"] = MONGO_URI
 mongo = PyMongo(app)
 
-# Access the specific database manually since no default DB is defined in the URI
-db = mongo.cx["mydb"]  # 👈 Replace 'yourdbname' with your actual database name
+# Specify the database
+db = mongo.cx["mydb"]
 
-
-
-
-
+# Home route
 @app.route('/')
 def index():
-    # print(db)
     return "Welcome to the Flask MongoDB API!"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Static category data
 @app.route('/categories', methods=['GET'])
 def get_categories():
     category_data = [
@@ -47,8 +27,7 @@ def get_categories():
             "icon": "/images/icon/icon-01.svg",
             "title": "Crafted for SaaS",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
-        }
-        ,
+        },
         {
             "id": 2,
             "icon": "/images/icon/icon-02.svg",
@@ -73,19 +52,10 @@ def get_categories():
             "title": "DB, Auth and Stripe",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
         }
-        # ,
-        # {
-        #     "id": 6,
-        #     "icon": "/images/icon/icon-06.svg",
-        #     "title": "Regular Free Updates",
-        #     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor."
-        # }
     ]
     return jsonify(category_data)
 
-
-
-
+# Get products by category ID
 @app.route('/category/<string:id>', methods=['GET'])
 def get_category_by_id(id):
     try:
@@ -95,7 +65,6 @@ def get_category_by_id(id):
         if not products:
             return jsonify({"error": "Category not found"}), 404
 
-        # Convert ObjectId to string for JSON serialization
         for product in products:
             product["_id"] = str(product["_id"])
 
@@ -105,36 +74,28 @@ def get_category_by_id(id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
-
-
-
-
+# Get reviews by category ID
 @app.route('/reviews/<string:id>', methods=['GET'])
 def get_reviews_by_category_id(id):
     try:
-        category_data = db.reviews.find({"categoryId": int(id)})
-        products = list(category_data)
+        reviews = db.reviews.find({"categoryId": int(id)})
+        reviews_list = list(reviews)
 
-        if not products:
+        if not reviews_list:
             return jsonify({"error": "Category not found"}), 404
 
-        for product in products:
-            product["_id"] = str(product["_id"])
+        for review in reviews_list:
+            review["_id"] = str(review["_id"])
 
-        return jsonify(products)
+        return jsonify(reviews_list)
     except ValueError:
         return jsonify({"error": "Invalid ID format"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
-
-
-
-
+# Add category data
 @app.route('/add', methods=['POST'])
-def add_data():
+def add_category():
     data = request.get_json()
     if not data:
         return jsonify({"error": "No data provided"}), 400
@@ -144,45 +105,20 @@ def add_data():
         return jsonify({"message": "Data inserted successfully!"}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
 
-
-
-
-
-
-
-
-
+# Add review data
 @app.route('/add-review', methods=['POST'])
-def add_data():
+def add_review():
     data = request.get_json()
     if not data:
         return jsonify({"error": "No data provided"}), 400
 
     try:
         db.reviews.insert_one(data)
-        return jsonify({"message": "Data inserted successfully!"}), 201
+        return jsonify({"message": "Review inserted successfully!"}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Run the Flask app
 if __name__ == '__main__':
     app.run(debug=True)

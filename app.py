@@ -94,9 +94,9 @@ def get_category_by_id(id):
 
 
 
-# Get reviews by category ID
+# Get reviews by product ID
 @app.route('/get_reviews/<string:id>', methods=['GET'])
-def get_reviews_by_category_id(id):
+def get_reviews_by_product_id(id):
     try:
         reviews = db.reviews.find({"productId": int(id)})
         reviews_list = list(reviews)

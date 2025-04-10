@@ -89,10 +89,7 @@ def get_category_by_id(id):
         category_info["_id"] = str(category_info["_id"])
 
         # Return both category and product data
-        return jsonify({
-            "category": category_info,
-            "products": products
-        })
+        return jsonify([category_info] + products)
 
     except ValueError:
         return jsonify({"error": "Invalid ID format"}), 400

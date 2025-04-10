@@ -208,22 +208,22 @@ def categories_analytics(category_id):
 
 
 
-        least_complaints = sorted(products_analytics_data, key=lambda x: len(x.get("complaints", [])))[:5]
+        # least_complaints = sorted(products_analytics_data, key=lambda x: len(x.get("complaints", [])))[:5]
 
-        least_complaints_data = [
-            {
-                "name": p.get("name"),
-                "complaints_count": len(p.get("complaints", [])),
-                "brand": p.get("brand")
-            } for p in least_complaints
-        ]
+        # least_complaints_data = [
+        #     {
+        #         "name": p.get("name"),
+        #         "complaints_count": len(p.get("complaints", [])),
+        #         "brand": p.get("brand")
+        #     } for p in least_complaints
+        # ]
 
 
         return jsonify({
             "status": "success",
             "category_id": category_id,
-            "top_rated_products": top_rated_data,
-            "least_complaints_products": least_complaints_data
+            "top_rated_products": top_rated_data
+            # "least_complaints_products": least_complaints_data
         }), 200
 
     except Exception as e:

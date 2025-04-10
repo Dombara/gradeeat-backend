@@ -65,27 +65,31 @@ def get_categories():
 
 
 
+# Get products by category ID
 @app.route('/category/<string:id>', methods=['GET'])
 def get_category_by_id(id):
     try:
+        # Convert category ID to integer
         category_id = int(id)
 
-        # Fetch category
+        # Fetch products belonging to this category
+        category_data = db.products.find({"categoryId": category_id})
+        products = list(category_data)
+
+        # Fetch category information
         category_info = db.categories.find_one({"id": category_id})
+
         if not category_info:
             return jsonify({"error": "Category not found"}), 404
-        category_info["_id"] = str(category_info["_id"])  # Convert ObjectID to string
 
-        # Fetch products
-        products_cursor = db.products.find({"categoryId": category_id})
-        products = list(products_cursor)
+        # Convert MongoDB ObjectIDs to strings
         for product in products:
-            product["_id"] = str(product["_id"])  # Convert ObjectID to string
+            product["_id"] = str(product["_id"])
 
-        # Combine into a single array
-        response = [category_info] + products
+            category_info["_id"] = str(category_info["_id"])
 
-        return jsonify(response)
+        # Return both category and product data
+        return jsonify([category_info] + products)
 
     except ValueError:
         return jsonify({"error": "Invalid ID format"}), 400
@@ -94,9 +98,10 @@ def get_category_by_id(id):
 
 
 
-# Get reviews by product ID
-@app.route('/get_reviews/<string:id>', methods=['GET'])
-def get_reviews_by_product_id(id):
+
+# Get reviews by category ID
+@app.route('/reviews/<string:id>', methods=['GET'])
+def get_reviews_by_category_id(id):
     try:
         reviews = db.reviews.find({"productId": int(id)})
         reviews_list = list(reviews)

@@ -86,7 +86,7 @@ def get_category_by_id(id):
         for product in products:
             product["_id"] = str(product["_id"])
 
-        category_info["_id"] = str(category_info["_id"])
+            category_info["_id"] = str(category_info["_id"])
 
         # Return both category and product data
         return jsonify([category_info] + products)

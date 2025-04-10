@@ -144,6 +144,27 @@ def add_data():
         return jsonify({"message": "Data inserted successfully!"}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+
+
+
+
+
+
+
+
+
+@app.route('/add-review', methods=['POST'])
+def add_data():
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+
+    try:
+        db.reviews.insert_one(data)
+        return jsonify({"message": "Data inserted successfully!"}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 

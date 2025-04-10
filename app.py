@@ -110,9 +110,8 @@ def get_category_by_id(id):
 
 
 
-
 @app.route('/reviews/<string:id>', methods=['GET'])
-def get_category_by_id(id):
+def get_reviews_by_category_id(id):
     try:
         category_data = db.reviews.find({"categoryId": int(id)})
         products = list(category_data)
@@ -120,20 +119,14 @@ def get_category_by_id(id):
         if not products:
             return jsonify({"error": "Category not found"}), 404
 
-        # Convert ObjectId to string for JSON serialization
         for product in products:
-            product["id"] = str(product["id"])
+            product["_id"] = str(product["_id"])
 
         return jsonify(products)
     except ValueError:
         return jsonify({"error": "Invalid ID format"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-
-
-
-
 
 
 

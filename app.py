@@ -59,7 +59,7 @@ def get_categories():
 @app.route('/category/<string:id>', methods=['GET'])
 def get_category_by_id(id):
     try:
-        category_data = db.Products.find({"categoryId": int(id)})
+        category_data = db.products.find({"categoryId": int(id)})
         products = list(category_data)
 
         if not products:
@@ -73,6 +73,9 @@ def get_category_by_id(id):
         return jsonify({"error": "Invalid ID format"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+
 
 # Get reviews by category ID
 @app.route('/reviews/<string:id>', methods=['GET'])
